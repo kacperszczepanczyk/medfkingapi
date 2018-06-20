@@ -136,7 +136,7 @@ class Employees_Name(Resource):
         return jsonify(result)
 
 
-api.add_resource(OnlinePlayers, '/online_players')  # Route_1
+api.add_resource(OnlinePlayers, '/online_players/<world>')  # Route_1
 api.add_resource(PlayerDetails, '/player_details/<player_name>')  # Route_3
 api.add_resource(Employees, '/employees')  # Route_1
 api.add_resource(Tracks, '/tracks')  # Route_2
