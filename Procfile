@@ -1,2 +1,2 @@
-web: gunicorn api.py
+web: gunicorn application:api.py
 worker: python medapiworker.py
