@@ -1,4 +1,4 @@
-import Parser
+from Parser import Parser
 from iron_cache import *
 
 # Create an client object
