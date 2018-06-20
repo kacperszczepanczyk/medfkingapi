@@ -27,7 +27,7 @@ parser = Parser()
 def cache_online_players(world):
     op = parser.get_online_players(str(world))
     v = json.dumps([ob.__dict__ for ob in op])
-    cache.put(cache="online_players", key="legacy", value=v)
+    cache.put(cache="online_players", key=world, value=v)
     print('Cached online players for ' + str(world))
 
 
