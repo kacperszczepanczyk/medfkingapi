@@ -34,17 +34,17 @@ class Player:
     def __lt__(self, other):
         return self.level < other
 
+
 class OnlinePlayers(Resource):
-    @property
     def get(self, world):
 
         #wrolds = {'legacy': 'legacy', 'spectrum': 'spectrum', '': 'First'}
 
         onlinePlayers = list()
         context = ssl._create_unverified_context()
-        url = 'http://medivia.online/community/online/' + world
+        url = 'http://medivia.online/community/online/' + str(world)
 
-        print("Getting online players on " + world)
+        print("Getting online players on " + str(world))
 
         try:
             data = urllib.request.urlopen(url, context=context).read()
