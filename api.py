@@ -16,7 +16,7 @@ from json import dumps
 #from medbot import Player
 
 #db_connect = create_engine('sqlite:///chinook.db')
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 api = Api(app)
 
 def printToConsole(msg):
