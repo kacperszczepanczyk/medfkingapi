@@ -23,7 +23,7 @@ print(item.value)
 
 # main loop
 #while True:
-online_players = parser.get_online_players()
+online_players = parser.get_online_players('legacy')
 cache.put(cache="online_players", key="players", value=online_players)
 item = cache.get(cache="online_players", key="players")
 print(item.value)

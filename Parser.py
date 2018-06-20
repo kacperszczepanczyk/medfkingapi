@@ -1,6 +1,6 @@
 import aiohttp
 import urllib
-from Utils import Player
+from Utils import *
 from http.client import IncompleteRead
 from bs4 import BeautifulSoup
 
