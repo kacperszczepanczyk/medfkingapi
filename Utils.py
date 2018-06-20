@@ -11,6 +11,13 @@ class Player:
     def __lt__(self, other):
         return self.level < other
 
+    def __dict__(self):
+        d = {}
+        d['name'] = self.name
+        d['profession'] = self.profession
+        d['level'] = self.level
+        return d
+
 
 class DetailedPlayer(Player):
 
