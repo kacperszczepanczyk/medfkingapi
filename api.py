@@ -48,7 +48,6 @@ class DetailedPlayer(Player):
         self.skills = skills
 
 
-
 class OnlinePlayers(Resource):
     def get(self, world):
 
