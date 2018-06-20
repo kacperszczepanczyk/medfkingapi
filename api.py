@@ -13,9 +13,7 @@ from sqlalchemy import create_engine
 from json import dumps
 #from flask_jsonpify import jsonify
 
-#from medbot import Player
 
-#db_connect = create_engine('sqlite:///chinook.db')
 app: Flask = Flask(__name__)
 api = Api(app)
 
@@ -37,6 +35,7 @@ class Player:
         return self.level < other
 
 class OnlinePlayers(Resource):
+    @property
     def get(self):
 
         onlinePlayers = list()
@@ -93,7 +92,7 @@ class OnlinePlayers(Resource):
             players.sort(reverse=True)
             onlinePlayers = list(players)
             print(onlinePlayers)
-            return json.dumps([ob.__dict__ for ob in onlinePlayers])
+            return json.dumps([ob.__dict__ for ob in onlinePlayers], indent=4, sort_keys=True)
 
             del players[:]
             del data
@@ -102,6 +101,14 @@ class OnlinePlayers(Resource):
             print("Fetching online players stopped - 0 players online.")
             print(len(players))
             onlinePlayers.clear()
+
+
+class PlayerDetails(Resource):
+    def get(self, player_name):
+        conn = db_connect.connect()
+        query = conn.execute("select * from employees where EmployeeId =%d " % int(employee_id))
+        result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
+        return jsonify(result)
 
 
 class Employees(Resource):
@@ -128,6 +135,7 @@ class Employees_Name(Resource):
 
 
 api.add_resource(OnlinePlayers, '/online_players')  # Route_1
+api.add_resource(PlayerDetails, '/player_details/<player_name>')  # Route_3
 api.add_resource(Employees, '/employees')  # Route_1
 api.add_resource(Tracks, '/tracks')  # Route_2
 api.add_resource(Employees_Name, '/employees/<employee_id>')  # Route_3
