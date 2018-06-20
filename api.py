@@ -36,13 +36,15 @@ class Player:
 
 class OnlinePlayers(Resource):
     @property
-    def get(self):
+    def get(self, world):
+
+        #wrolds = {'legacy': 'legacy', 'spectrum': 'spectrum', '': 'First'}
 
         onlinePlayers = list()
         context = ssl._create_unverified_context()
-        url = 'http://medivia.online/community/online/legacy'
+        url = 'http://medivia.online/community/online/' + world
 
-        print("Getting online players ")
+        print("Getting online players on " + world)
 
         try:
             data = urllib.request.urlopen(url, context=context).read()
