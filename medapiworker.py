@@ -1,5 +1,6 @@
 from Parser import Parser
 from iron_cache import *
+from time import sleep
 import json
 
 # Create an client object
@@ -11,8 +12,8 @@ parser = Parser()
     #cache.put(cache="test_cache", key="mykey" + str(i), value="Cache" + str(i))
 
 # Get an item
-item = cache.get(cache="test_cache", key="mykey3")
-print(item.value)
+#item = cache.get(cache="test_cache", key="mykey3")
+#print(item.value)
 
 # Delete an item
 # cache.delete(cache="test_cache", key="mykey")
@@ -22,10 +23,18 @@ print(item.value)
 
 # return json.dumps([ob.__dict__ for ob in online_players])
 
+
+def cache_online_players(world):
+    op = parser.get_online_players(str(world))
+    v = json.dumps([ob.__dict__ for ob in op])
+    cache.put(cache="online_players", key="legacy", value=v)
+    print('Cached online players for ' + str(world))
+
+
 # main loop
-#while True:
-online_players = parser.get_online_players('legacy')
-value = json.dumps([ob.__dict__ for ob in online_players])
-cache.put(cache="online_players", key="players", value=value)
-item = cache.get(cache="online_players", key="players")
-print(item.value)
+while True:
+    cache_online_players('legacy')
+    cache_online_players('destiny')
+    cache_online_players('spectrum')
+    cache_online_players('pendulum')
+    sleep(10)
