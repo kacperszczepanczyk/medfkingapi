@@ -2,4 +2,4 @@ beautifulsoup4
 flask
 sqlalchemy
 aiohttp
-
+flask_restful

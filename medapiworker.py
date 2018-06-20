@@ -17,7 +17,7 @@ from json import dumps
 
 
 
-print("medfkingapiwroking!!")
+print("med api is working")
 
 
 #db_connect = create_engine('sqlite:///chinook.db')
