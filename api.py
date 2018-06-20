@@ -92,7 +92,7 @@ class OnlinePlayers(Resource):
             players.sort(reverse=True)
             onlinePlayers = list(players)
             print(onlinePlayers)
-            return json.dumps([ob.__dict__ for ob in onlinePlayers], sort_keys=True)
+            return json.dumps([ob.__dict__ for ob in onlinePlayers])
 
             del players[:]
             del data
