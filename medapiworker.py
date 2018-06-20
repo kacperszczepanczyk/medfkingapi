@@ -25,6 +25,7 @@ print(item.value)
 # main loop
 #while True:
 online_players = parser.get_online_players('legacy')
-cache.put(cache="online_players", key="players", value=json.dumps([ob.__dict__ for ob in online_players]))
+value = json.dumps([ob.__dict__ for ob in online_players])
+cache.put(cache="online_players", key="players", value=value)
 item = cache.get(cache="online_players", key="players")
 print(item.value)
