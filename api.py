@@ -17,10 +17,6 @@ from json import dumps
 app: Flask = Flask(__name__)
 api = Api(app)
 
-def printToConsole(msg):
-    print("[" + str(time.asctime(time.localtime(time.time())) + "] " + str(msg)))
-
-
 class Player:
 
     def __init__(self, name, profession, level):
@@ -35,10 +31,26 @@ class Player:
         return self.level < other
 
 
+class DetailedPlayer(Player):
+
+    def __init__(self, name, profession, level, mlevel, sex, world, status, accstatus, residence, guild, house, skills):
+        self.name = name
+        self.profession = profession
+        self.level = level
+        self.mlevel = mlevel
+        self.sex = sex
+        self.world = world
+        self.status = status
+        self.accstatus = accstatus
+        self.residence = residence
+        self.guild = guild
+        self.house = house
+        self.skills = skills
+
+
+
 class OnlinePlayers(Resource):
     def get(self, world):
-
-        #wrolds = {'legacy': 'legacy', 'spectrum': 'spectrum', '': 'First'}
 
         onlinePlayers = list()
         context = ssl._create_unverified_context()
