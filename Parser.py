@@ -53,7 +53,7 @@ class Parser:
         for name, voc, level in zip(names, vocs, levels):
             players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
 
-        if len(players) > 2:
+        if players and len(players) > 2:
             del players[len(players) - 1]
             del players[0]
 
