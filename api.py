@@ -9,6 +9,7 @@ import json
 
 from flask import Flask, request
 from flask_restful import Resource, Api
+from iron_cache import *
 from sqlalchemy import create_engine
 from json import dumps
 #from flask_jsonpify import jsonify
@@ -16,6 +17,7 @@ from json import dumps
 
 app: Flask = Flask(__name__)
 api = Api(app)
+cache = IronCache()
 
 class Player:
 
@@ -50,7 +52,10 @@ class DetailedPlayer(Player):
 
 class OnlinePlayers(Resource):
     def get(self, world):
+        item = cache.get(cache="online_players", key="players")
+        return item.value
 
+'''
         onlinePlayers = list()
         context = ssl._create_unverified_context()
         url = 'http://medivia.online/community/online/' + str(world)
@@ -114,7 +119,7 @@ class OnlinePlayers(Resource):
             print("Fetching online players stopped - 0 players online.")
             print(len(players))
             onlinePlayers.clear()
-
+'''
 
 class PlayerDetails(Resource):
     def get(self, player_name):
