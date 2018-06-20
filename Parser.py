@@ -62,7 +62,6 @@ class Parser:
 
             players.sort(reverse=True)
             online_players = list(players)
-            print(online_players)
             return online_players
 
         else:
