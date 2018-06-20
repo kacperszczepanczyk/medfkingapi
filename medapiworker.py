@@ -1,5 +1,6 @@
 from Parser import Parser
 from iron_cache import *
+import json
 
 # Create an client object
 cache = IronCache()
@@ -24,6 +25,6 @@ print(item.value)
 # main loop
 #while True:
 online_players = parser.get_online_players('legacy')
-cache.put(cache="online_players", key="players", value=online_players)
+cache.put(cache="online_players", key="players", value=json.dumps([ob.__dict__ for ob in online_players]))
 item = cache.get(cache="online_players", key="players")
 print(item.value)
