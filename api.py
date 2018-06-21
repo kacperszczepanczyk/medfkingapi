@@ -14,8 +14,8 @@ class OnlinePlayers(Resource):
         return item.value
 
 
-class PlayerDetails(Resource):
-    def get(self, player_name):
+class Highscores(Resource):
+    def get(self, world, profession):
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         #return jsonify(result)
 
@@ -29,7 +29,7 @@ class Employees(Resource):
 '''
 
 api.add_resource(OnlinePlayers, '/online_players/<world>')
-api.add_resource(PlayerDetails, '/player_details/<player_name>')
+api.add_resource(Highscores, '/player_details/<player_name>')
 
 if __name__ == '__main__':
     app.run(port='')

@@ -1,11 +1,13 @@
 from Parser import Parser
 from iron_cache import *
-from time import sleep
 import json
 import asyncio
 
+
 cache = IronCache()
 parser = Parser()
+
+
 
 # Put an item
 #for i in range(0, 5):
@@ -39,7 +41,6 @@ def cache_highscores(world, profession):
 
 
 async def fetch_online_players(interval):
-    while True:
         asyncio.sleep(interval)
         cache_online_players('legacy')
         cache_online_players('destiny')
@@ -48,11 +49,14 @@ async def fetch_online_players(interval):
 
 
 async def fetch_highscores(interval):
-    while True:
         asyncio.sleep(interval)
         cache_highscores('legacy', 'warriors')
 
 
 # main
-fetch_online_players(10)
-fetch_highscores(30)
+async def run():
+    while True:
+        await fetch_online_players(10)
+        await fetch_highscores(30)
+
+run()
