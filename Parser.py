@@ -84,9 +84,9 @@ class Parser:
             skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')
             print("Updating highscore: " + url)
             highscore = {}
-            highscore[skill] = {}
+            highscore[str(skill)] = {}
             for name, skill_value in zip(names, skill_values):
-                highscore[skill][name] = skill_value
+                highscore[str(skill)][str(name)] = skill_value
                 print(name.get_text() + skill_value.get_text())
 
             highscores.append(highscore)
