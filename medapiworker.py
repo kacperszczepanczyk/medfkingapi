@@ -42,7 +42,7 @@ def cache_highscores(world, profession):
 
 
 async def fetch_online_players(interval):
-    #while True:
+    while True:
         await asyncio.sleep(interval)
         cache_online_players('legacy')
         cache_online_players('destiny')
@@ -51,7 +51,7 @@ async def fetch_online_players(interval):
 
 
 async def fetch_highscores(interval):
-   # while True:
+    while True:
         await asyncio.sleep(interval)
         cache_highscores('legacy', 'warriors')
 
