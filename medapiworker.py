@@ -3,6 +3,7 @@ from iron_cache import *
 import json
 import time
 import asyncio
+import threading
 from threading import Thread
 
 
@@ -58,8 +59,8 @@ def fetch_highscores(interval):
 
 
 if __name__ == '__main__':
-    Thread(target=fetch_online_players(5)).start()
-    Thread(target=fetch_highscores(10)).start()
+    threading.Thread(target=fetch_online_players(5)).start()
+    threading.Thread(target=fetch_highscores(10)).start()
 
 
 ''''# main
