@@ -33,8 +33,7 @@ class Parser:
         except aiohttp.client_exceptions.ServerDisconnectedError:
             print("SERVER DISCONNECTED ERROR EXCEPTION")
             # print(data)
-        except Exception:
-            import traceback
+        except:
             print("SOME OTHER EXCEPTION")
             # print(data)
 
