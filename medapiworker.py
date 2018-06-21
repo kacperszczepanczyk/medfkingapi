@@ -30,14 +30,15 @@ def cache_online_players(world):
     print('Cached online players for ' + str(world))
 
 
-def cache_highscores(world, profession, skill):
-    hs = parser.get_highscores(world, profession, skill)
+def cache_highscores(world, profession):
+    hs = parser.get_highscores(world, profession)
     v = json.dumps(hs)
-    cache.put(cache="highscores", key=world + '_' + profession + '_' + skill, value=v)
-    print('Cached online players for ' + str(world))
+    cache.put(cache="highscores", key=world + '_' + profession, value=v)
+    print('Cached higscores for  ' + str(world) + '_' + profession)
 
 # main loop
 while True:
+    cache_highscores('legacy', 'warriors')
     cache_online_players('legacy')
     cache_online_players('destiny')
     cache_online_players('spectrum')
