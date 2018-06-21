@@ -37,6 +37,7 @@ class Parser:
             print("SOME OTHER EXCEPTION")
             # print(data)
 
+
     def get_online_players(self, world):
         online_players = list()
         url = 'http://medivia.online/community/online/' + str(world)
@@ -66,3 +67,33 @@ class Parser:
         else:
             online_players.clear()
             return online_players
+
+
+    def get_player_details(self, name):
+        url = 'http://medivia.online/community/online/' + str(world)
+        print("Getting detailed info for " + str(name))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

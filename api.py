@@ -16,8 +16,6 @@ class OnlinePlayers(Resource):
 
 class PlayerDetails(Resource):
     def get(self, player_name):
-        conn = db_connect.connect()
-        query = conn.execute("select * from employees where EmployeeId =%d " % int(employee_id))
         result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         #return jsonify(result)
 

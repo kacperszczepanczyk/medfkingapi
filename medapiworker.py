@@ -3,7 +3,6 @@ from iron_cache import *
 from time import sleep
 import json
 
-# Create an client object
 cache = IronCache()
 parser = Parser()
 
