@@ -10,7 +10,8 @@ class Parser:
 
     def get_source_data(self, url):
         context = ssl._create_unverified_context()
-
+        return urllib.request.urlopen(url, context=context).read()
+    '''
         try:
             return urllib.request.urlopen(url, context=context).read()
         except IncompleteRead:
@@ -36,7 +37,7 @@ class Parser:
         except:
             print("SOME OTHER EXCEPTION")
             # print(data)
-
+    '''
 
     def get_online_players(self, world):
         online_players = list()
@@ -68,13 +69,23 @@ class Parser:
             online_players.clear()
             return online_players
 
-
     def get_player_details(self, name):
         url = 'http://medivia.online/community/online/' + str(world)
         print("Getting detailed info for " + str(name))
 
+    def get_highscores(self, world, profession, skill):
+        url = 'https://medivia.online/highscores/' + world + '/' + profession + '/' + skill
+        data = self.get_source_data(url)
+        soup = BeautifulSoup(data, "html.parser")
+        names = soup.find_all('div', class_='med-width-66')
+        skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')
+        print("Updating highscore: " + url)
+        highscore = {}
+        for name, skill_value in zip(names, skill_values):
+            highscore[name] = skill_value
+            print(name.get_text() + skill_value.get_text())
 
-
+        return highscore
 
 
 
