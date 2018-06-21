@@ -41,6 +41,7 @@ def cache_highscores(world, profession):
 
 
 async def fetch_online_players(interval):
+    while True:
         await asyncio.sleep(interval)
         cache_online_players('legacy')
         cache_online_players('destiny')
@@ -49,15 +50,15 @@ async def fetch_online_players(interval):
 
 
 async def fetch_highscores(interval):
+    while True:
         await asyncio.sleep(interval)
         cache_highscores('legacy', 'warriors')
 
 
 # main
 async def run():
-    while True:
-        await fetch_online_players(10)
-        await fetch_highscores(30)
+    await fetch_online_players(10)
+    await fetch_highscores(10)
 
 
 loop = asyncio.get_event_loop()
