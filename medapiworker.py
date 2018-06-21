@@ -61,6 +61,6 @@ async def run():
     await fetch_highscores(10)
 
 loop = asyncio.get_event_loop()
-asyncio.ensure_future(fetch_online_players(10))
+asyncio.ensure_future(fetch_online_players(5))
 asyncio.ensure_future(fetch_highscores(10))
 loop.run_forever()
