@@ -58,9 +58,9 @@ def fetch_highscores(interval):
         cache_highscores('legacy', 'warriors')
 
 
-if __name__ == '__main__':
-    threading.Thread(target=fetch_online_players(5)).start()
-    threading.Thread(target=fetch_highscores(10)).start()
+
+threading.Thread(target=fetch_online_players(5)).start()
+threading.Thread(target=fetch_highscores(10)).start()
 
 
 ''''# main
