@@ -16,7 +16,7 @@ class OnlinePlayers(Resource):
 
 class Highscores(Resource):
     def get(self, world, profession):
-        item = cache.get(cache="highscores", key=str(world) + ' ' + profession)
+        item = cache.get(cache="highscores", key=str(world) + '_' + profession)
         return item.value
 
 
@@ -29,7 +29,7 @@ class Employees(Resource):
 '''
 
 api.add_resource(OnlinePlayers, '/online_players/<world>')
-api.add_resource(Highscores, '/player_details/<world>/<profession>')
+api.add_resource(Highscores, '/highscores/<world>/<profession>')
 
 if __name__ == '__main__':
     app.run(port='')
