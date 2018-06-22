@@ -11,6 +11,7 @@ import asyncio
 
 class Parser:
 
+    data_g = ''
     async def fetch(self, session, url):
         async with session.get(url) as response:
             return await response.text()
@@ -19,7 +20,7 @@ class Parser:
         async with aiohttp.ClientSession() as session:
             html = await self.fetch(session, url)
             print(html)
-            return html
+            self.data_g = html
 
     def get_source_data_req(self, url):
         try:
@@ -64,8 +65,11 @@ class Parser:
         url = 'http://medivia.online/community/online/' + str(world)
         print("Getting online players on " + str(world))
 
-        data = self.get_source_data_async(url)
-        soup = BeautifulSoup(data, "html.parser")
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.get_source_data_async(url))
+
+        #data = self.get_source_data_async(url)
+        soup = BeautifulSoup(self.data_g, "html.parser")
         names = soup.find_all('div', class_='med-width-35')
         vocs = soup.find_all('div', class_='med-width-15')
         levels = soup.find_all('div', class_='med-width-25 med-text-right med-pr-40')
