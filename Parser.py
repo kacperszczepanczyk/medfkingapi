@@ -76,7 +76,8 @@ class Parser:
             del players[0]
             return players
 
-        return players
+        elist = list()
+        return elist
 
     def get_highscores(self, world, profession):
         highscores = {}
