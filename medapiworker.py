@@ -53,11 +53,15 @@ if __name__ == '__main__':
     print(p)
     while True:
         if not p.is_alive():
+            p.terminate()
+            p = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
             p.start()
         if not p1.is_alive():
+            p1.terminate()
+            p1 = Process(target=fetch_highscores, args=(60,), name='fetch_online_players')
             p1.start()
-        #print(str(p) + ' ' + str(p.is_alive()))
-        #print(str(p1) + ' ' + str(p1.is_alive()))
+        print(str(p) + ' ' + str(p.is_alive()))
+        print(str(p1) + ' ' + str(p1.is_alive()))
         time.sleep(5)
 
 
