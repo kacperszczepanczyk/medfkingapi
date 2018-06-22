@@ -99,8 +99,7 @@ class Parser:
         print("Getting detailed info for " + str(name))
 
     def get_highscores(self, world, profession):
-        highscores = list()
-        highscore = {}
+        highscores = {}
         skills = ['maglevel', 'fist', 'club', 'sword', 'axe', 'distance', 'shielding', 'fishing', 'mining']
         for skill in skills:
             url = 'https://medivia.online/highscores/' + world + '/' + profession + '/' + skill
@@ -109,15 +108,11 @@ class Parser:
             names = soup.find_all('div', class_='med-width-66')
             skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')
             print("Updating highscore: " + url)
-            #highscore = {}
-            highscore[skill] = {}
+            highscores[skill] = {}
             for name, skill_value in zip(names, skill_values):
-                highscore[skill][name.get_text()] = skill_value.get_text()
-                #print(name.get_text() + skill_value.get_text())
+                highscores[skill][name.get_text()] = skill_value.get_text()
 
-           # highscores.append(highscore)
-        print(highscore)
-        return highscore
+        return highscores
 
 
 

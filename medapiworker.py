@@ -2,6 +2,8 @@ from Parser import Parser
 from iron_cache import *
 import json
 import asyncio
+from multiprocessing import Process
+import time
 from threading import Thread
 
 
@@ -55,13 +57,38 @@ async def fetch_highscores(interval):
         cache_highscores('legacy', 'warriors')
 
 
+def fetch_online_players1(interval):
+    while True:
+        time.sleep(interval)
+        cache_online_players('legacy')
+        cache_online_players('destiny')
+        cache_online_players('spectrum')
+        cache_online_players('pendulum')
+
+
+def fetch_highscores1(interval):
+    while True:
+        time.sleep(interval)
+        cache_highscores('legacy', 'warriors')
+
+
 '''
 async def run():
     await fetch_online_players(10)
     await fetch_highscores(10)
     '''
 
+if __name__ == '__main__':
+    p = Process(target=fetch_online_players1, args=(10))
+    p.start()
+    #p.join()
+    p1 = Process(target=fetch_highscores1, args=(10))
+    p1.start()
+   # p1.join()
+
+'''
 loop = asyncio.get_event_loop()
 asyncio.ensure_future(fetch_online_players(10))
 asyncio.ensure_future(fetch_highscores(1*60))
 loop.run_forever()
+'''
