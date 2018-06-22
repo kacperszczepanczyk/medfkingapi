@@ -24,7 +24,6 @@ class Parser:
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             return ''
 
-
     def get_source_data(self, url):
         context = ssl._create_unverified_context()
         return urllib.request.urlopen(url, context=context).read()
@@ -73,7 +72,9 @@ class Parser:
         players_dict = {}
         for name, voc, level in zip(names, vocs, levels):
             players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
-            players_dict[counter] = {name.get_text(), voc.get_text(), level.get_text()}
+            players_dict[counter]['name'] = name.get_text()
+            players_dict[counter]['profession'] = voc.get_text()
+            players_dict[counter]['level'] = level.get_text()
             counter = counter + 1
 
         print(players_dict)
