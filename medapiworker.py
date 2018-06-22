@@ -1,6 +1,7 @@
 from Parser import Parser
 from multiprocessing import Process
 from iron_cache import *
+from random import randint
 import json
 import time
 
@@ -34,9 +35,16 @@ def fetch_online_players(interval):
 
 
 def fetch_highscores(interval):
+    if randint(0, 1) == 1:
+        worlds_arr = worlds[::-1]
+        professions_arr = professions[::-1]
+    else:
+        worlds_arr = worlds
+        professions_arr = professions
+
     while True:
-        for world in worlds:
-            for profession in professions:
+        for world in worlds_arr:
+            for profession in professions_arr:
                 time.sleep(2)
                 cache_highscores(world, profession)
         time.sleep(interval)
@@ -58,7 +66,7 @@ if __name__ == '__main__':
             p.start()
         if not p1.is_alive():
             p1.terminate()
-            p1 = Process(target=fetch_highscores, args=(60,), name='fetch_online_players')
+            p1 = Process(target=fetch_highscores, args=(60,), name='fetch_highscores')
             p1.start()
         print(str(p) + ' ' + str(p.is_alive()))
         print(str(p1) + ' ' + str(p1.is_alive()))
