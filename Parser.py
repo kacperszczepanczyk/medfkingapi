@@ -69,8 +69,14 @@ class Parser:
         levels = soup.find_all('div', class_='med-width-25 med-text-right med-pr-40')
 
         players = list()
+        counter = 0
+        players_dict = {}
         for name, voc, level in zip(names, vocs, levels):
             players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
+            players_dict[counter] = {name.get_text(), voc.get_text(), level.get_text()}
+            counter = counter + 1
+
+        print(players_dict)
 
         if players and len(players) > 2:
             del players[len(players) - 1]
@@ -79,7 +85,6 @@ class Parser:
             for player in players:
                 player.level = int(player.level)
 
-            players.sort(reverse=True)
             online_players = list(players)
             return online_players
 

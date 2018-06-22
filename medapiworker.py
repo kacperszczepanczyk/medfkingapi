@@ -50,26 +50,26 @@ def fetch_highscores(interval):
         time.sleep(interval)
 
 
-if __name__ == '__main__':
-    p = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
-    print(p)
-    p.start()
-    print(p)
-    p1 = Process(target=fetch_highscores, args=(60,),  name='fetch_highscores')
-    print(p1)
+def thread_manager(interval):
+    p1 = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
     p1.start()
-    print(p)
+    p2 = Process(target=fetch_highscores, args=(60,), name='fetch_highscores')
+    p2.start()
     while True:
-        if not p.is_alive():
-            p.terminate()
-            p = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
-            p.start()
         if not p1.is_alive():
             p1.terminate()
-            p1 = Process(target=fetch_highscores, args=(60,), name='fetch_highscores')
+            p1 = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
             p1.start()
-        print(str(p) + ' ' + str(p.is_alive()))
+        if not p2.is_alive():
+            p2.terminate()
+            p2 = Process(target=fetch_highscores, args=(60,), name='fetch_highscores')
+            p2.start()
         print(str(p1) + ' ' + str(p1.is_alive()))
-        time.sleep(5)
+        print(str(p2) + ' ' + str(p2.is_alive()))
+        time.sleep(interval)
+
+
+if __name__ == '__main__':
+    thread_manager(5)
 
 
