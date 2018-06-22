@@ -15,7 +15,7 @@ professions = ['warriors', 'scouts', 'clerics', 'sorcerers', 'none', 'all']
 
 def cache_online_players(world):
     op = parser_online.get_online_players(str(world))
-    v = json.dumps([ob.as_dict() for ob in op])
+    v = json.dumps(op)
     cache.put(cache="online_players", key=world, value=v)
     print('Cached online players for ' + str(world))
 
