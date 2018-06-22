@@ -65,8 +65,8 @@ class Parser:
         url = 'http://medivia.online/community/online/' + str(world)
         print("Getting online players on " + str(world))
 
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.get_source_data_async(url))
+        parser_loop = asyncio.get_event_loop()
+        parser_loop.run_until_complete(self.get_source_data_async(url))
 
         #data = self.get_source_data_async(url)
         soup = BeautifulSoup(self.data_g, "html.parser")
