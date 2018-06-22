@@ -1,12 +1,32 @@
 import aiohttp
 import urllib
 import ssl
+import requests
 from Utils import *
 from http.client import IncompleteRead
 from bs4 import BeautifulSoup
+import aiohttp
+import asyncio
 
 
 class Parser:
+
+    async def fetch(self, session, url):
+        async with session.get(url) as response:
+            return await response.text()
+
+    async def get_source_data_async(self, url):
+        async with aiohttp.ClientSession() as session:
+            html = await self.fetch(session, url)
+            print(html)
+            return html
+
+    def get_source_data_req(self, url):
+        try:
+            return requests.get(url, params={'s': thing})
+        except requests.exceptions.RequestException as e:  # This is the correct syntax
+            return ''
+
 
     def get_source_data(self, url):
         context = ssl._create_unverified_context()
@@ -44,7 +64,7 @@ class Parser:
         url = 'http://medivia.online/community/online/' + str(world)
         print("Getting online players on " + str(world))
 
-        data = self.get_source_data(url)
+        data = self.get_source_data_async(url)
         soup = BeautifulSoup(data, "html.parser")
         names = soup.find_all('div', class_='med-width-35')
         vocs = soup.find_all('div', class_='med-width-15')
