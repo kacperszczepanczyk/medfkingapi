@@ -68,34 +68,16 @@ class Parser:
         levels = soup.find_all('div', class_='med-width-25 med-text-right med-pr-40')
 
         players = list()
-        counter = 0
-        dict_list = list()
         for name, voc, level in zip(names, vocs, levels):
-            players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
-            players_dict = {}
-            players_dict['name'] = name.get_text()
-            players_dict['profession'] = voc.get_text()
-            players_dict['level'] = level.get_text()
-            dict_list.append(players_dict)
-            counter = counter + 1
+            player = {'name': name.get_text(), 'profession': voc.get_text(), 'level': level.get_text()}
+            players.append(player)
 
-        print(dict_list)
-        del dict_list[0]
-        return dict_list
-
-        if players and len(players) > 2:
+        if players and len(players) < 2:
             del players[len(players) - 1]
             del players[0]
+            return players
 
-            for player in players:
-                player.level = int(player.level)
-
-            online_players = list(players)
-            return online_players
-
-        else:
-            online_players.clear()
-            return players_dict
+        return  #list().append("0 players online")
 
     def get_highscores(self, world, profession):
         highscores = {}
