@@ -37,7 +37,7 @@ def fetch_highscores(interval):
     while True:
         for world in worlds:
             for profession in professions:
-                time.sleep(2)
+                #time.sleep(2)
                 cache_highscores(world, profession)
         time.sleep(interval)
 
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     print(p)
     p.start()
     print(p)
-    p1 = Process(target=fetch_highscores, args=(60,))
+    p1 = Process(target=fetch_highscores, args=(2,))
     print(p1)
     p1.start()
     print(p)
