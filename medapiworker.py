@@ -16,14 +16,14 @@ def cache_online_players(world):
     op = parser_online.get_online_players(str(world))
     v = json.dumps([ob.as_dict() for ob in op])
     cache.put(cache="online_players", key=world, value=v)
-    print('Cached online players for ' + str(world))
+    #print('Cached online players for ' + str(world))
 
 
 def cache_highscores(world, profession):
     hs = parser_highscores.get_highscores(world, profession)
     v = json.dumps(hs)
     cache.put(cache="highscores", key=world + '_' + profession, value=v)
-    print('Cached higscores for  ' + str(world) + '_' + profession)
+    #print('Cached higscores for  ' + str(world) + '_' + profession)
 
 
 def fetch_online_players(interval):
@@ -51,3 +51,9 @@ if __name__ == '__main__':
     print(p1)
     p1.start()
     print(p)
+    while True:
+        print(p)
+        print(p1)
+        time.sleep(5)
+
+
