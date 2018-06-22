@@ -79,10 +79,10 @@ async def run():
     '''
 
 if __name__ == '__main__':
-    p = Process(target=fetch_online_players1, args=(10))
+    p = Process(target=fetch_online_players1, args=(10,))
     p.start()
     #p.join()
-    p1 = Process(target=fetch_highscores1, args=(10))
+    p1 = Process(target=fetch_highscores1, args=(10,))
     p1.start()
    # p1.join()
 
