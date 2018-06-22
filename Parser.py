@@ -76,7 +76,7 @@ class Parser:
             del players[0]
             return players
 
-        return list().append("0 players online")
+        return ' '
 
     def get_highscores(self, world, profession):
         highscores = {}
