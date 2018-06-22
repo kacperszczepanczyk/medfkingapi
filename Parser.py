@@ -67,6 +67,7 @@ class Parser:
 
         parser_loop = asyncio.get_event_loop()
         parser_loop.run_until_complete(self.get_source_data_async(url))
+        parser_loop.close()
 
         #data = self.get_source_data_async(url)
         soup = BeautifulSoup(self.data_g, "html.parser")
