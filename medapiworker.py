@@ -1,33 +1,16 @@
 from Parser import Parser
+from multiprocessing import Process
 from iron_cache import *
 import json
-import asyncio
-from multiprocessing import Process
 import time
-from threading import Thread
-
 
 cache = IronCache()
 parser_online = Parser()
 parser_highscores = Parser()
 
+worlds = ['legacy', 'spectrum', 'destiny', 'pendulum']
+professions = ['warriors', 'scouts', 'clerics', 'sorcerers', 'none', 'all']
 
-
-# Put an item
-#for i in range(0, 5):
-    #cache.put(cache="test_cache", key="mykey" + str(i), value="Cache" + str(i))
-
-# Get an item
-#item = cache.get(cache="test_cache", key="mykey3")
-#print(item.value)
-
-# Delete an item
-# cache.delete(cache="test_cache", key="mykey")
-
-# Increment an item in the cache
-# cache.increment(cache="test_cache", key="mykey", amount=10)
-
-# return json.dumps([ob.__dict__ for ob in online_players])
 
 def cache_online_players(world):
     op = parser_online.get_online_players(str(world))
@@ -43,53 +26,24 @@ def cache_highscores(world, profession):
     print('Cached higscores for  ' + str(world) + '_' + profession)
 
 
-async def fetch_online_players(interval):
-    while True:
-        await asyncio.sleep(interval)
-        cache_online_players('legacy')
-        cache_online_players('destiny')
-        cache_online_players('spectrum')
-        cache_online_players('pendulum')
-
-
-async def fetch_highscores(interval):
-    while True:
-        await asyncio.sleep(interval)
-        cache_highscores('legacy', 'warriors')
-
-
-def fetch_online_players1(interval):
+def fetch_online_players(interval):
     while True:
         time.sleep(interval)
-        cache_online_players('legacy')
-        cache_online_players('destiny')
-        cache_online_players('spectrum')
-        cache_online_players('pendulum')
+        for world in worlds:
+            cache_online_players(world)
 
 
-def fetch_highscores1(interval):
+def fetch_highscores(interval):
     while True:
         time.sleep(interval)
-        cache_highscores('legacy', 'warriors')
+        for world in worlds:
+            for profession in professions:
+                time.sleep(2)
+                cache_highscores(world, profession)
 
-
-'''
-async def run():
-    await fetch_online_players(10)
-    await fetch_highscores(10)
-    '''
 
 if __name__ == '__main__':
-    p = Process(target=fetch_online_players1, args=(10,))
+    p = Process(target=fetch_online_players, args=(10,))
     p.start()
-    #p.join()
-    p1 = Process(target=fetch_highscores1, args=(60,))
+    p1 = Process(target=fetch_highscores, args=(60,))
     p1.start()
-   # p1.join()
-
-'''
-loop = asyncio.get_event_loop()
-asyncio.ensure_future(fetch_online_players(10))
-asyncio.ensure_future(fetch_highscores(1*60))
-loop.run_forever()
-'''
