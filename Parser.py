@@ -72,6 +72,7 @@ class Parser:
         players_dict = {}
         for name, voc, level in zip(names, vocs, levels):
             players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
+            players_dict[counter] = {}
             players_dict[counter]['name'] = name.get_text()
             players_dict[counter]['profession'] = voc.get_text()
             players_dict[counter]['level'] = level.get_text()
