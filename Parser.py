@@ -1,7 +1,6 @@
 import urllib
 import ssl
 import requests
-from Utils import *
 from bs4 import BeautifulSoup
 import aiohttp
 import asyncio
@@ -18,13 +17,18 @@ class Parser:
             html = await self.fetch(session, url)
             return html
 
+    def get_source_data(self, url):
+        parser_loop = asyncio.get_event_loop()
+        data = parser_loop.run_until_complete(self.get_source_data_async(url))
+        return data
+
     def get_source_data_req(self, url):
         try:
             return requests.get(url)
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             return ''
 
-    def get_source_data(self, url):
+    def get_source_data_old(self, url):
         context = ssl._create_unverified_context()
         return urllib.request.urlopen(url, context=context).read()
     '''
@@ -55,11 +59,25 @@ class Parser:
             # print(data)
     '''
 
+    def get_player_info(self, name):
+        #name = ('' + '%20'.join(a))
+        url = 'https://medivia.online/community/character/' + name
+        print("Getting detailed info for " + url)
+
+        data = self.get_source_data(url)
+        soup = BeautifulSoup(data, "html.parser")
+        mw50s = soup.find_all('div', class_='med-width-100 med-mt-10')
+        info = {'guild': 'None'}
+        for mw50 in mw50s:
+            key, value = mw50.get_text().split(":")
+            info[key] = value
+
+        return info
+
     def get_online_players(self, world):
         url = 'http://medivia.online/community/online/' + str(world)
 
-        parser_loop = asyncio.get_event_loop()
-        data = parser_loop.run_until_complete(self.get_source_data_async(url))
+        data = self.get_source_data(url)
 
         soup = BeautifulSoup(data, "html.parser")
         names = soup.find_all('div', class_='med-width-35')
@@ -72,7 +90,6 @@ class Parser:
             players.append(player)
 
         if players and len(players) > 2:
-            #del players[len(players) - 1]
             del players[0]
 
         return players
@@ -82,9 +99,7 @@ class Parser:
         skills = ['maglevel', 'fist', 'club', 'sword', 'axe', 'distance', 'shielding', 'fishing', 'mining']
         for skill in skills:
             url = 'https://medivia.online/highscores/' + world + '/' + profession + '/' + skill
-            parser_loop = asyncio.get_event_loop()
-            data = parser_loop.run_until_complete(self.get_source_data_async(url))
-            #data = self.get_source_data(url)
+            data = self.get_source_data(url)
             soup = BeautifulSoup(data, "html.parser")
             names = soup.find_all('div', class_='med-width-66')
             skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')

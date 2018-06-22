@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_restful import Resource, Api
 from iron_cache import *
+from Parser import *
 
 
 app: Flask = Flask(__name__)
 api = Api(app)
 cache = IronCache()
+parser = Parser()
 
 
 class OnlinePlayers(Resource):
@@ -20,6 +22,10 @@ class Highscores(Resource):
         return item.value
 
 
+class PlayerInfo(Resource):
+    def get(self, name):
+        return parser.get_player_info(name)
+
 '''
 class Employees(Resource):
     def get(self):
@@ -30,6 +36,7 @@ class Employees(Resource):
 
 api.add_resource(OnlinePlayers, '/online_players/<world>')
 api.add_resource(Highscores, '/highscores/<world>/<profession>')
+api.add_resource(PlayerInfo, '/player_info/<name>')
 
 if __name__ == '__main__':
     app.run(port='')
