@@ -92,7 +92,7 @@ class Parser:
 
         else:
             online_players.clear()
-            return online_players
+            return players_dict
 
     def get_highscores(self, world, profession):
         highscores = {}
