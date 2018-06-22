@@ -43,17 +43,21 @@ def fetch_highscores(interval):
 
 
 if __name__ == '__main__':
-    p = Process(target=fetch_online_players, args=(1,))
+    p = Process(target=fetch_online_players, args=(1,), name='fetch_online_players')
     print(p)
     p.start()
     print(p)
-    p1 = Process(target=fetch_highscores, args=(2,))
+    p1 = Process(target=fetch_highscores, args=(2,),  name='fetch_highscores')
     print(p1)
     p1.start()
     print(p)
-    while True:
-        print(p)
-        print(p1)
+    while p.is_alive() and p1.is_alive():
+        if not p.is_alive():
+            p.start()
+        if not p1.is_alive():
+            p1.start()
+        print(str(p) + ' ' + str(p.is_alive()))
+        print(str(p1) + ' ' + str(p1.is_alive()))
         time.sleep(5)
 
 
