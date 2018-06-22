@@ -68,6 +68,7 @@ class Parser:
 
         parser_loop = asyncio.get_event_loop()
         data = parser_loop.run_until_complete(self.get_source_data_async(url))
+        print(data)
 
         #data = self.get_source_data_async(url)
         soup = BeautifulSoup(data, "html.parser")
@@ -99,7 +100,9 @@ class Parser:
         skills = ['maglevel', 'fist', 'club', 'sword', 'axe', 'distance', 'shielding', 'fishing', 'mining']
         for skill in skills:
             url = 'https://medivia.online/highscores/' + world + '/' + profession + '/' + skill
-            data = self.get_source_data(url)
+            parser_loop = asyncio.get_event_loop()
+            data = parser_loop.run_until_complete(self.get_source_data_async(url))
+            #data = self.get_source_data(url)
             soup = BeautifulSoup(data, "html.parser")
             names = soup.find_all('div', class_='med-width-66')
             skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')
