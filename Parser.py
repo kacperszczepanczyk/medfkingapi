@@ -11,7 +11,6 @@ import asyncio
 
 class Parser:
 
-    data_g = ''
     async def fetch(self, session, url):
         async with session.get(url) as response:
             return await response.text()
@@ -19,8 +18,6 @@ class Parser:
     async def get_source_data_async(self, url):
         async with aiohttp.ClientSession() as session:
             html = await self.fetch(session, url)
-            #print(html)
-            self.data_g = html
             return html
 
     def get_source_data_req(self, url):
@@ -68,9 +65,7 @@ class Parser:
 
         parser_loop = asyncio.get_event_loop()
         data = parser_loop.run_until_complete(self.get_source_data_async(url))
-        #print(data)
 
-        #data = self.get_source_data_async(url)
         soup = BeautifulSoup(data, "html.parser")
         names = soup.find_all('div', class_='med-width-35')
         vocs = soup.find_all('div', class_='med-width-15')
