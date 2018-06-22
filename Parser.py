@@ -66,7 +66,7 @@ class Parser:
         print("Getting online players on " + str(world))
 
         parser_loop = asyncio.get_event_loop()
-        parser_loop.create_task(self.get_source_data_async(url)))
+        parser_loop.create_task(self.get_source_data_async(url))
        # parser_loop.close()
 
         #data = self.get_source_data_async(url)
