@@ -8,7 +8,8 @@ from threading import Thread
 
 
 cache = IronCache()
-parser = Parser()
+parser_online = Parser()
+parser_highscores = Parser()
 
 
 
@@ -29,14 +30,14 @@ parser = Parser()
 # return json.dumps([ob.__dict__ for ob in online_players])
 
 def cache_online_players(world):
-    op = parser.get_online_players(str(world))
+    op = parser_online.get_online_players(str(world))
     v = json.dumps([ob.as_dict() for ob in op])
     cache.put(cache="online_players", key=world, value=v)
     print('Cached online players for ' + str(world))
 
 
 def cache_highscores(world, profession):
-    hs = parser.get_highscores(world, profession)
+    hs = parser_highscores.get_highscores(world, profession)
     v = json.dumps(hs)
     cache.put(cache="highscores", key=world + '_' + profession, value=v)
     print('Cached higscores for  ' + str(world) + '_' + profession)
@@ -82,7 +83,7 @@ if __name__ == '__main__':
     p = Process(target=fetch_online_players1, args=(10,))
     p.start()
     #p.join()
-    p1 = Process(target=fetch_highscores1, args=(10,))
+    p1 = Process(target=fetch_highscores1, args=(60,))
     p1.start()
    # p1.join()
 
