@@ -79,6 +79,7 @@ class Parser:
             counter = counter + 1
 
         print(players_dict)
+        return players_dict
 
         if players and len(players) > 2:
             del players[len(players) - 1]
