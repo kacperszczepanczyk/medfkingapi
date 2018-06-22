@@ -71,13 +71,11 @@ class Parser:
             player = {'name': name.get_text(), 'profession': voc.get_text(), 'level': level.get_text()}
             players.append(player)
 
-        if players and len(players) < 2:
-            del players[len(players) - 1]
+        if players and len(players) > 2:
+            #del players[len(players) - 1]
             del players[0]
-            return players
 
-        elist = list()
-        return elist
+        return players
 
     def get_highscores(self, world, profession):
         highscores = {}
