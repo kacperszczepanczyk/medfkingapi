@@ -1,9 +1,7 @@
-import aiohttp
 import urllib
 import ssl
 import requests
 from Utils import *
-from http.client import IncompleteRead
 from bs4 import BeautifulSoup
 import aiohttp
 import asyncio
@@ -61,7 +59,6 @@ class Parser:
     def get_online_players(self, world):
         online_players = list()
         url = 'http://medivia.online/community/online/' + str(world)
-        print("Getting online players on " + str(world))
 
         parser_loop = asyncio.get_event_loop()
         data = parser_loop.run_until_complete(self.get_source_data_async(url))
@@ -101,7 +98,6 @@ class Parser:
             soup = BeautifulSoup(data, "html.parser")
             names = soup.find_all('div', class_='med-width-66')
             skill_values = soup.find_all('div', class_='med-width-35 med-text-right med-pr-40')
-            print("Updating highscore: " + url)
             highscores[skill] = {}
             for name, skill_value in zip(names, skill_values):
                 highscores[skill][name.get_text()] = skill_value.get_text()
