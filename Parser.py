@@ -69,18 +69,19 @@ class Parser:
 
         players = list()
         counter = 0
-        players_dict = {}
+        dict_list = list()
         for name, voc, level in zip(names, vocs, levels):
             players.append(Player(name.get_text(), voc.get_text(), level.get_text()))
-            players_dict[counter] = {}
-            players_dict[counter]['name'] = name.get_text()
-            players_dict[counter]['profession'] = voc.get_text()
-            players_dict[counter]['level'] = level.get_text()
+            players_dict = {}
+            players_dict['name'] = name.get_text()
+            players_dict['profession'] = voc.get_text()
+            players_dict['level'] = level.get_text()
+            dict_list.append(players_dict)
             counter = counter + 1
 
-        print(players_dict)
-        del players_dict[0]
-        return players_dict
+        print(dict_list)
+        del dict_list[0]
+        return dict_list
 
         if players and len(players) > 2:
             del players[len(players) - 1]
