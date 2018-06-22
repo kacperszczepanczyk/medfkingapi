@@ -56,7 +56,6 @@ class Parser:
     '''
 
     def get_online_players(self, world):
-        online_players = list()
         url = 'http://medivia.online/community/online/' + str(world)
 
         parser_loop = asyncio.get_event_loop()
@@ -77,7 +76,7 @@ class Parser:
             del players[0]
             return players
 
-        return  #list().append("0 players online")
+        return list().append("0 players online")
 
     def get_highscores(self, world, profession):
         highscores = {}
