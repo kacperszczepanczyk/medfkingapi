@@ -26,7 +26,6 @@ parser = Parser()
 
 # return json.dumps([ob.__dict__ for ob in online_players])
 
-
 def cache_online_players(world):
     op = parser.get_online_players(str(world))
     v = json.dumps([ob.as_dict() for ob in op])
