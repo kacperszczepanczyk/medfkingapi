@@ -55,7 +55,7 @@ if __name__ == '__main__':
     print(p)
     p.start()
     print(p)
-    p1 = Process(target=fetch_highscores, args=(10*60,),  name='fetch_highscores')
+    p1 = Process(target=fetch_highscores, args=(60,),  name='fetch_highscores')
     print(p1)
     p1.start()
     print(p)
