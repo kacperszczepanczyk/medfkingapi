@@ -69,7 +69,7 @@ class Parser:
         info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
         for stat in stats:
             key, value = stat.get_text().split(":")
-            info[key] = value
+            info[key.strip()] = value.strip()
 
         return info
 
