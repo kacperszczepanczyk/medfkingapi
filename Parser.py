@@ -60,16 +60,15 @@ class Parser:
     '''
 
     def get_player_info(self, name):
-        #name = ('' + '%20'.join(a))
         url = 'https://medivia.online/community/character/' + name
         print("Getting detailed info for " + url)
 
         data = self.get_source_data(url)
         soup = BeautifulSoup(data, "html.parser")
-        mw50s = soup.find_all('div', class_='med-width-100 med-mt-10')
-        info = {'guild': 'None'}
-        for mw50 in mw50s:
-            key, value = mw50.get_text().split(":")
+        stats = soup.find_all('div', class_='med-width-100 med-mt-10')
+        info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
+        for stat in stats:
+            key, value = stat.get_text().split(":")
             info[key] = value
 
         return info
