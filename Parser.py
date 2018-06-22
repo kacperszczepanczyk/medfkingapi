@@ -19,7 +19,7 @@ class Parser:
     async def get_source_data_async(self, url):
         async with aiohttp.ClientSession() as session:
             html = await self.fetch(session, url)
-            print(html)
+            #print(html)
             self.data_g = html
 
     def get_source_data_req(self, url):
