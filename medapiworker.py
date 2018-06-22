@@ -51,7 +51,7 @@ if __name__ == '__main__':
     print(p1)
     p1.start()
     print(p)
-    while p.is_alive() and p1.is_alive():
+    while True:
         if not p.is_alive():
             p.start()
         if not p1.is_alive():
