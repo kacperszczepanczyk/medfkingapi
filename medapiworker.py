@@ -28,18 +28,18 @@ def cache_highscores(world, profession):
 
 def fetch_online_players(interval):
     while True:
-        time.sleep(interval)
         for world in worlds:
             cache_online_players(world)
+        time.sleep(interval)
 
 
 def fetch_highscores(interval):
     while True:
-        time.sleep(interval)
         for world in worlds:
             for profession in professions:
                 time.sleep(2)
                 cache_highscores(world, profession)
+        time.sleep(interval)
 
 
 if __name__ == '__main__':

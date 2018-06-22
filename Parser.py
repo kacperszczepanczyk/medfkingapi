@@ -21,10 +21,11 @@ class Parser:
             html = await self.fetch(session, url)
             #print(html)
             self.data_g = html
+            return html
 
     def get_source_data_req(self, url):
         try:
-            return requests.get(url, params={'s': thing})
+            return requests.get(url)
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             return ''
 
@@ -66,10 +67,10 @@ class Parser:
         print("Getting online players on " + str(world))
 
         parser_loop = asyncio.get_event_loop()
-        parser_loop.run_until_complete(self.get_source_data_async(url))
+        data = parser_loop.run_until_complete(self.get_source_data_async(url))
 
         #data = self.get_source_data_async(url)
-        soup = BeautifulSoup(self.data_g, "html.parser")
+        soup = BeautifulSoup(data, "html.parser")
         names = soup.find_all('div', class_='med-width-35')
         vocs = soup.find_all('div', class_='med-width-15')
         levels = soup.find_all('div', class_='med-width-25 med-text-right med-pr-40')
@@ -92,10 +93,6 @@ class Parser:
         else:
             online_players.clear()
             return online_players
-
-    def get_player_details(self, name):
-        url = 'http://medivia.online/community/online/' + str(world)
-        print("Getting detailed info for " + str(name))
 
     def get_highscores(self, world, profession):
         highscores = {}
