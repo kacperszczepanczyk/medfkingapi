@@ -43,7 +43,7 @@ def fetch_highscores(interval):
 
 
 if __name__ == '__main__':
-    p = Process(target=fetch_online_players, args=(10,))
+    p = Process(target=fetch_online_players, args=(1,))
     print(p)
     p.start()
     print(p)
