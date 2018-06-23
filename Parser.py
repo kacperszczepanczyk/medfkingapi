@@ -65,6 +65,30 @@ class Parser:
         logo_path = style.replace("background-image: url('", "").replace("');", "").replace(' ', '')
         return "https://medivia.online" + logo_path
 
+    def get_player_activities(self, soup):
+        div = soup.find_all('div', class_='med-width-100')
+        titles = div[1].find_all('div', class_='title')
+        del titles[0]
+        #activity_types = []
+        #for typ in activity_titles:
+           # activity_types.append(typ.get_text())
+           # print(typ.get_text())
+
+        _dict = dict()
+        lists = soup.find_all('div', class_='med-width-100 med-p-10 med-show-more')
+        for title, _list in zip(titles, lists):
+            times = _list.find_all('div', class_='med-width-25')
+            activities = _list.find_all('div', class_='med-width-75')
+            msg = ''
+            for time, activity in zip(times, activities):
+                msg = msg + time.get_text() + ' ' + activity.get_text() + '\n'
+
+            if title != "Task list":
+                _dict[title] = msg
+
+        print(_dict)
+        return _dict
+
     def get_player_info(self, name):
         url = 'https://medivia.online/community/character/' + name
         print("Getting detailed info for " + url)
@@ -77,6 +101,11 @@ class Parser:
             key, value = stat.get_text().split(":")
             info[key.strip()] = value.strip()
         info['logo'] = self.get_player_logo(soup)
+        activities = self.get_player_activities(soup)
+        if 'Death list' in activities:
+            info['Latest deaths'] = activities['Death list']
+        if 'Kill list' in activities:
+            info['Latest kills'] = activities['Kill list']
 
         return info
 
