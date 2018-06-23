@@ -88,8 +88,8 @@ class Parser:
             player = {'name': name.get_text(), 'profession': voc.get_text(), 'level': level.get_text()}
             players.append(player)
 
-        if players and len(players) > 2:
-            del players[0]
+        #if players and len(players) > 2:
+            #del players[0]
 
         return players
 
