@@ -107,6 +107,8 @@ class Parser:
             info['Latest deaths'] = activities['Death list']
         if 'Kill list' in activities:
             info['Latest kills'] = activities['Kill list']
+        if 'tasks_done' in activities:
+            info['tasks_done'] = activities['tasks_done']
 
         return info
 
