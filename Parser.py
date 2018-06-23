@@ -69,10 +69,6 @@ class Parser:
         div = soup.find_all('div', class_='med-width-100')
         titles = div[1].find_all('div', class_='title')
         del titles[0]
-        #activity_types = []
-        #for typ in activity_titles:
-           # activity_types.append(typ.get_text())
-           # print(typ.get_text())
 
         _dict = dict()
         lists = soup.find_all('div', class_='med-width-100 med-p-10 med-show-more')
@@ -86,22 +82,22 @@ class Parser:
             if title != "Task list":
                 _dict[title.get_text()] = msg
 
-        print(_dict)
         return _dict
 
     def get_player_info(self, name):
-        url = 'https://medivia.online/community/character/' + name
+        url = 'https://medivia.online/community/character/' + name.replace(' ', '%20')
         print("Getting detailed info for " + url)
 
         data = self.get_source_data(url)
         soup = BeautifulSoup(data, "html.parser")
+        activities = self.get_player_activities(soup)
         stats = soup.find_all('div', class_='med-width-100 med-mt-10')
         info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
         for stat in stats:
             key, value = stat.get_text().split(":")
             info[key.strip()] = value.strip()
+
         info['logo'] = self.get_player_logo(soup)
-        activities = self.get_player_activities(soup)
         if 'Death list' in activities:
             info['Latest deaths'] = activities['Death list']
         if 'Kill list' in activities:
