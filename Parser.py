@@ -94,7 +94,7 @@ class Parser:
         soup = BeautifulSoup(data, "html.parser")
         activities = self.get_player_activities(soup)
         stats = soup.find_all('div', class_='med-width-100 med-mt-10')
-        info = {'guild': '-', 'house': '-', 'comment': '-', 'tasks_done': 0,
+        info = {'status': '-', 'guild': '-', 'house': '-', 'comment': '-', 'tasks_done': 0,
                 'Latest deaths': 'This player has not died in the last 4 weeks.',
                 'Latest kills': 'This player has not killed anyone in the last 4 weeks.'}
         for stat in stats:
