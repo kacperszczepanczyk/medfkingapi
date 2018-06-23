@@ -99,7 +99,7 @@ class Parser:
                 'Latest kills': 'This player has not killed anyone in the last 4 weeks.'}
         for stat in stats:
             if stat.get_text().startswith('comment:'):
-                info['comment'] = stat.get_text().replace('comment:', '')
+                info['comment'] = stat.get_text()[8:]
             else:
                 key, value = stat.get_text().split(':')
                 info[key.strip()] = value.strip()
