@@ -94,6 +94,7 @@ class Parser:
         stats = soup.find_all('div', class_='med-width-100 med-mt-10')
         info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
         for stat in stats:
+            print(stat.get_text())
             key, value = stat.get_text().split(":")
             info[key.strip()] = value.strip()
 
