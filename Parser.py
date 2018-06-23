@@ -83,7 +83,7 @@ class Parser:
                 _dict[title.get_text()] = msg
             else:
                 print(len(activities)
-                _dict['tasks_done'] = 5
+                #_dict['tasks_done'] = 5
 
         return _dict
 
