@@ -77,7 +77,7 @@ class Parser:
             activities = _list.find_all('div', class_='med-width-75')
             msg = ''
             for time, activity in zip(times, activities):
-                msg = msg + time.get_text() + ' ' + activity.get_text() + '\n'
+                msg = msg + '• ' + time.get_text() + ' ' + activity.get_text() + '\n'
 
             if title.get_text() == "Task list":
                 _dict['tasks_done'] = len(activities)
