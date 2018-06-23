@@ -84,7 +84,7 @@ class Parser:
                 msg = msg + time.get_text() + ' ' + activity.get_text() + '\n'
 
             if title != "Task list":
-                _dict[title] = msg
+                _dict[title.get_text()] = msg
 
         print(_dict)
         return _dict
