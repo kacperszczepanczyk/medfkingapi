@@ -59,6 +59,12 @@ class Parser:
             # print(data)
     '''
 
+    def get_player_logo(self, soup):
+        div = soup.find('div', class_='med-news-image')
+        style = div.find_all('div')[0]['style']
+        logo_path = style.replace("background-image: url('", "").replace("');", "").replace(' ', '')
+        return "https://medivia.online" + logo_path
+
     def get_player_info(self, name):
         url = 'https://medivia.online/community/character/' + name
         print("Getting detailed info for " + url)
@@ -70,6 +76,7 @@ class Parser:
         for stat in stats:
             key, value = stat.get_text().split(":")
             info[key.strip()] = value.strip()
+        info['logo'] = self.get_player_logo(soup)
 
         return info
 
