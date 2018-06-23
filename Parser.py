@@ -95,8 +95,11 @@ class Parser:
         info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
         for stat in stats:
             print(stat.get_text())
-            key, value = stat.get_text().split(":")
-            info[key.strip()] = value.strip()
+            if stat.get_text().startswith('comment:'):
+                info['comment'] = stat.get_text().replace('comment:', '')
+            else:
+                key, value = stat.get_text().split(':')
+                info[key.strip()] = value.strip()
 
         info['logo'] = self.get_player_logo(soup)
         if 'Death list' in activities:
