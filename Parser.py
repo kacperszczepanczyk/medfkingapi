@@ -79,11 +79,10 @@ class Parser:
             for time, activity in zip(times, activities):
                 msg = msg + time.get_text() + ' ' + activity.get_text() + '\n'
 
-            if title != "Task list":
+            if title.get_text() == "Task list":
+                _dict['tasks_done'] = len(activities)
+            else:
                 _dict[title.get_text()] = msg
-           # else:
-                #print(len(activities)
-                #_dict['tasks_done'] = 5
 
         return _dict
 
