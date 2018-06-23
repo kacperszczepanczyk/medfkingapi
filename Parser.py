@@ -94,7 +94,9 @@ class Parser:
         soup = BeautifulSoup(data, "html.parser")
         activities = self.get_player_activities(soup)
         stats = soup.find_all('div', class_='med-width-100 med-mt-10')
-        info = {'guild': 'None', 'house': 'None', 'comment': 'None'}
+        info = {'guild': '-', 'house': '-', 'comment': '-', 'tasks_done': 0,
+                'Latest deaths': 'This player have not died in the last 4 weeks.',
+                'Latest kills': 'This player have not killed anyone in the last 4 weeks.'}
         for stat in stats:
             if stat.get_text().startswith('comment:'):
                 info['comment'] = stat.get_text().replace('comment:', '')
