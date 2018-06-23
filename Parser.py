@@ -81,6 +81,8 @@ class Parser:
 
             if title != "Task list":
                 _dict[title.get_text()] = msg
+            else:
+                _dict['tasks_done'] = len(activities)
 
         return _dict
 
