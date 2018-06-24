@@ -66,7 +66,7 @@ def thread_manager(interval):
             p1.start()
         if not p2.is_alive():
             p2.terminate()
-            p2 = Process(target=fetch_highscores, args=(30*60,), name='fetch_highscores')
+            p2 = Process(target=fetch_highscores, args=(2*60*60,), name='fetch_highscores')
             p2.start()
         print(str(p1) + ' ' + str(p1.is_alive()))
         print(str(p2) + ' ' + str(p2.is_alive()))
