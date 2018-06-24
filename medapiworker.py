@@ -7,7 +7,7 @@ import json
 import time
 
 cache = IronCache()
-mc = Memcache()
+memcache = Memcache()
 parser_online = Parser()
 parser_highscores = Parser()
 
@@ -19,7 +19,7 @@ def cache_online_players(world):
     op = parser_online.get_online_players(str(world))
     v = json.dumps(op)
     cache.put(cache="online_players", key=world, value=v)
-    mc.set(world, v)
+    memcache.mc.set(world, v)
     print('Cached online players for ' + str(world))
 
 
