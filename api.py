@@ -16,7 +16,8 @@ class OnlinePlayers(Resource):
     def get(self, world):
        # item = cache.get(cache="online_players", key=str(world))
         item = memcache.cache.get(str(world))
-        return item.value
+        #return item.value
+        return item
 
 
 class Highscores(Resource):
