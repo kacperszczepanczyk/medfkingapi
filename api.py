@@ -22,8 +22,10 @@ class OnlinePlayers(Resource):
 
 class Highscores(Resource):
     def get(self, world, profession):
-        item = cache.get(cache="highscores", key=str(world) + '_' + profession)
-        return item.value
+        #item = cache.get(cache="highscores", key=str(world) + '_' + profession)
+        item = memcache.cache.get('highscores_' + world + '_' + profession)
+        return item
+        #return item.value
 
 
 class PlayerInfo(Resource):
