@@ -1,4 +1,5 @@
 from Parser import Parser
+from Memcache import Memcache
 from multiprocessing import Process
 from iron_cache import *
 from random import randint
@@ -6,6 +7,7 @@ import json
 import time
 
 cache = IronCache()
+mc = Memcache()
 parser_online = Parser()
 parser_highscores = Parser()
 
@@ -17,6 +19,7 @@ def cache_online_players(world):
     op = parser_online.get_online_players(str(world))
     v = json.dumps(op)
     cache.put(cache="online_players", key=world, value=v)
+    mc.set(world, v)
     print('Cached online players for ' + str(world))
 
 
