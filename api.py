@@ -2,17 +2,20 @@ from flask import Flask
 from flask_restful import Resource, Api
 from iron_cache import *
 from Parser import *
+from Memcache import Memcache
 
 
 app: Flask = Flask(__name__)
 api = Api(app)
 cache = IronCache()
+memcache = Memcache()
 parser = Parser()
 
 
 class OnlinePlayers(Resource):
     def get(self, world):
-        item = cache.get(cache="online_players", key=str(world))
+       # item = cache.get(cache="online_players", key=str(world))
+        item = memcache.cache.get(world)
         return item.value
 
 
