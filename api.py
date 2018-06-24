@@ -15,7 +15,7 @@ parser = Parser()
 class OnlinePlayers(Resource):
     def get(self, world):
        # item = cache.get(cache="online_players", key=str(world))
-        item = memcache.cache.get(world)
+        item = memcache.cache.get(str(world))
         return item.value
 
 
