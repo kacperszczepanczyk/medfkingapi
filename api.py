@@ -47,4 +47,5 @@ api.add_resource(PlayerInfo, '/player_info/<name>')
 
 if __name__ == '__main__':
     thread_manager(10)
+    print("API STARTED")
     app.run(port='')
