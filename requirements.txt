@@ -7,6 +7,6 @@ flask_restful
 gunicorn
 iron_cache
 libmemcached-dev
-pylibmc>=1.5.2
+pylibmc==1.2.3
 flask_script
 Flask-Script
