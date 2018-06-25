@@ -6,6 +6,6 @@ aiohttp
 flask_restful
 gunicorn
 iron_cache
-pylibmc==1.5.2
+pylibmc
 flask_script
 Flask-Script
