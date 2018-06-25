@@ -14,18 +14,18 @@ parser = Parser()
 
 class OnlinePlayers(Resource):
     def get(self, world):
-       # item = cache.get(cache="online_players", key=str(world))
-        item = memcache.cache.get(str(world))
-        #return item.value
-        return item
+        item = cache.get(cache="online_players", key=str(world))
+        return item.value
+        #item = memcache.cache.get(str(world))
+        #return item
 
 
 class Highscores(Resource):
     def get(self, world, profession):
-        #item = cache.get(cache="highscores", key=str(world) + '_' + profession)
-        item = memcache.cache.get('highscores_' + world + '_' + profession)
-        return item
-        #return item.value
+        #item = memcache.cache.get('highscores_' + world + '_' + profession)
+        #return item
+        item = cache.get(cache="highscores", key=str(world) + '_' + profession)
+        return item.value
 
 
 class PlayerInfo(Resource):
