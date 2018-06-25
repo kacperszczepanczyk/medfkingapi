@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_script import Server, Manager
 from iron_cache import *
 from Parser import *
 from Memcache import Memcache
@@ -45,8 +46,21 @@ api.add_resource(OnlinePlayers, '/online_players/<world>')
 api.add_resource(Highscores, '/highscores/<world>/<profession>')
 api.add_resource(PlayerInfo, '/player_info/<name>')
 
+
+class CustomServer(Server):
+    def __call__(self, app1, *args, **kwargs):
+        thread_manager(10)
+        print("API STARTED")
+        #Hint: Here you could manipulate app
+        return Server.__call__(self, app1, *args, **kwargs)
+
+
+manager = Manager(app)
+manager.add_command('runserver', CustomServer())
+
 if __name__ == '__main__':
-    thread_manager(10)
-    print("API STARTED")
-    app.run(port='')
-    print("API STARTED")
+   # thread_manager(10)
+   # print("API STARTED")
+    #app.run(port='')
+    manager.run()
+   # print("API STARTED")
