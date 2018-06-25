@@ -49,3 +49,4 @@ if __name__ == '__main__':
     thread_manager(10)
     print("API STARTED")
     app.run(port='')
+    print("API STARTED")
