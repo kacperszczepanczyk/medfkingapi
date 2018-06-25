@@ -74,9 +74,6 @@ def thread_manager(interval):
 
 
 if __name__ == '__main__':
-    #thread_manager(5)
-    while True:
-        time.sleep(3)
-        print("worker working ---------------------")
+    thread_manager(10)
 
 
