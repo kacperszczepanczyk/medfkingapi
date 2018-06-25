@@ -57,7 +57,7 @@ def fetch_highscores(interval):
 def thread_manager(interval):
     p1 = Process(target=fetch_online_players, args=(10,), name='fetch_online_players')
     p1.start()
-    p2 = Process(target=fetch_highscores, args=(60,), name='fetch_highscores')
+    p2 = Process(target=fetch_highscores, args=(2*60*60,), name='fetch_highscores')
     p2.start()
     while True:
         if not p1.is_alive():
@@ -74,6 +74,9 @@ def thread_manager(interval):
 
 
 if __name__ == '__main__':
-    thread_manager(5)
+    #thread_manager(5)
+    while True:
+        time.sleep(3)
+        print("worker working ---------------------")
 
 

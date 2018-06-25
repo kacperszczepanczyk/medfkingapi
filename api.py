@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from iron_cache import *
 from Parser import *
 from Memcache import Memcache
+from medapiworker import *
 
 
 app: Flask = Flask(__name__)
@@ -45,4 +46,5 @@ api.add_resource(Highscores, '/highscores/<world>/<profession>')
 api.add_resource(PlayerInfo, '/player_info/<name>')
 
 if __name__ == '__main__':
+    thread_manager(10)
     app.run(port='')
