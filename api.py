@@ -49,6 +49,7 @@ api.add_resource(PlayerInfo, '/player_info/<name>')
 
 class CustomServer(Server):
     def __call__(self, app1, *args, **kwargs):
+        print("API STARTED")
         thread_manager(10)
         print("API STARTED")
         #Hint: Here you could manipulate app

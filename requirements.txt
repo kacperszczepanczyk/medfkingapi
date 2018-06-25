@@ -8,3 +8,4 @@ gunicorn
 iron_cache
 pylibmc==1.5.2
 flask_script
+Flask-Script
